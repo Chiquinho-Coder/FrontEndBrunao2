@@ -18,10 +18,10 @@ function App() {
         <img src={logo} alt="" style={{ width: 101, height: 94 , flexShrink:0}}/>
         <nav> 
         <p>DesenrolaJá</p>
-        <a href="">Home</a>
-        <a href="">Sobre</a>
-        <a href="">Serviços</a>
-        <a href="">Contato</a> 
+        <a href="/home">Home</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/servico">Serviços</a>
+        <a href="/ctt2">Contato</a> 
         </nav>
         <button>Sign in</button>
          </div>
@@ -230,15 +230,15 @@ function App() {
           <p>DesenrolaJá</p>
           <p>© 2024 DryBer SMF. All Rights Reserved</p>
           <ul>
-            <li><a href="#">Instagram Profissional</a></li>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">TikTok</a></li>
-            <li><a href="#">Youtube</a></li>
+            <li><a href="/insta">Instagram Profissional</a></li>
+            <li><a href="/link">LinkedIn</a></li>
+            <li><a href="/tik">TikTok</a></li>
+            <li><a href="/ytb">Youtube</a></li>
           </ul>
           <ul>
-            <li><a href="#">Termos e condições</a></li>
-            <li><a href="#">Política de privacidade</a></li>
-            <li><a href="#">Contato</a></li>
+            <li><a href="/te">Termos e condições</a></li>
+            <li><a href="/pp">Política de privacidade</a></li>
+            <li><a href="/ctt">Contato</a></li>
           </ul>
           <p>Contato: (851) 707070-707070</p>
           <p>Email: ORSL_SMF@gmail.com</p>
