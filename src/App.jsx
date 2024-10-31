@@ -1,16 +1,18 @@
+import React from 'react';
+import {Link } from 'react-router-dom';
 import logo from './assets/images/logo_orea.png';
 import cara_oreia from './assets/images/cara_orea.png';
 import muro from './assets/images/muro.jpg';
-import cozinha from './assets/images/bancada.jpg';
 import banheiro from './assets/images/banheiro.jpg';
 import telhado from './assets/images/telhado.jpg';
-import cliente from './assets/images/luvadepedreiro.png'
+import casa from './assets/images/casa.jpg';
+import cliente from './assets/images/luvadepedreiro.jpg';
 import './css/fonts.css';
-import './App.scss';
 import './css/styles.css';
-
+import './App.scss';
 
 function App() {
+
   return (
     <div className="App">
       <div className='Header_site'>
@@ -23,7 +25,7 @@ function App() {
         <a href="/servico">Serviços</a>
         <a href="/ctt2">Contato</a> 
         </nav>
-        <button>Sign in</button>
+        <Link to='/login'><button>Sign In</button></Link>
          </div>
         </div>
 
@@ -123,8 +125,8 @@ function App() {
       <p>★★★★★</p>
     </div>
     <div className="servico_item">
-      <img src={cozinha} alt="Casarão" />
-      <p>Bancada em mármore</p>
+      <img src={casa} alt="Casarão" />
+      <p>Casa Completa</p>
       <p>★★★★★</p>
     </div>
   </div>
@@ -244,7 +246,8 @@ function App() {
           <p>Email: ORSL_SMF@gmail.com</p>
         </div>
       </footer>
-    </div>
+      </div>
+    
   );
 }
 
