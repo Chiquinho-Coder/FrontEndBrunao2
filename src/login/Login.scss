@@ -4,9 +4,9 @@
   margin-left: 550px;
   margin-top: 50px;
   border: 2px solid #000;
-  font-family: 'Almarai';
+  font-family: "Almarai";
   font-size: 12px;
-  background: #F5B91E;
+  background: #f5b91e;
   box-shadow: 4px 4px 4px 5px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@ input {
   background-color: #ffffff;
   color: #000;
   border-radius: 4px;
-  text-decoration: none; 
+  text-decoration: none;
   text-align: center;
   display: inline-block;
 }
@@ -46,9 +46,9 @@ input {
 .botao {
   margin-top: 15px;
   padding: 12px 24px;
-  width: 100%; 
-  max-width: 300px; 
-  background-color: #5f4100; 
+  width: 100%;
+  max-width: 300px;
+  background-color: #5f4100;
   color: white;
   border: none;
   border-radius: 8px;
@@ -62,11 +62,11 @@ input {
 }
 
 .botao:hover {
-  background-color: #218838; 
-  transform: scale(1.05); 
+  background-color: #218838;
+  transform: scale(1.05);
 }
 
 .botao:active {
   background-color: #1e7e34;
-  transform: scale(0.98); 
+  transform: scale(0.98);
 }
