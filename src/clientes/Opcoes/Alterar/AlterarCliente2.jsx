@@ -13,7 +13,7 @@ const AlterarCliente2 = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:3010";
+  const API_URL = "http://20.83.237.168:3010";
 
   const fetchCliente = async () => {
     try {
