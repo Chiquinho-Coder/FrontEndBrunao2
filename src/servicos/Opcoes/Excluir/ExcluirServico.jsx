@@ -6,23 +6,27 @@ import { deletarUser } from "../../../services/APIService.js";
 
 const ExcluirServico = () => {
   const [servicoId, setServicoId] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   const handleDelete = async () => {
     if (servicoId.trim() === "") {
-      alert("Por favor, insira o ID do serviço que deseja excluir.");
+      setError("Por favor, insira o ID do serviço que deseja excluir.");
       return;
     }
 
     try {
       const response = await deletarUser(servicoId);
-      alert(`Serviço com ID ${servicoId} foi excluído com sucesso!`);
+      setMessage(`Serviço com ID ${servicoId} foi excluído com sucesso!`);
+      setError("");
       setServicoId("");
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert(`Erro: Serviço com ID ${servicoId} não encontrado.`);
+        setError(`Erro: Serviço com ID ${servicoId} não encontrado.`);
       } else {
-        alert(`Erro ao excluir o serviço com ID ${servicoId}.`);
+        setError(`Erro ao excluir o serviço com ID ${servicoId}.`);
       }
+      setMessage("");
     }
   };
   return (
@@ -105,6 +109,8 @@ const ExcluirServico = () => {
         <button className="btn_delete" onClick={handleDelete}>
           Excluir
         </button>
+        {message && <p className="success-message">{message}</p>}
+        {error && <p className="error-message">{error}</p>}
       </div>
     </div>
   );
