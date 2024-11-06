@@ -50,7 +50,7 @@ function ServicosInicial() {
             {servicos.map((servico) => (
               <li key=
               {servico.id}>
-               ID: {servico.fk_id_cli} Endereço: {servico.ds_endereco} - Valor: R${servico.vlr_servico} - Data : {new Date(servico.dt_estimada).toLocaleDateString('pt-BR')} - Descrição:  {servico.ds_servico}
+            ID Serviço: {servico.id_servico} - ID Cliente: {servico.fk_id_cli} - Endereço: {servico.ds_endereco} - Valor: R${servico.vlr_servico} - Data : {new Date(servico.dt_estimada).toLocaleDateString('pt-BR')} - Descrição:  {servico.ds_servico}
               </li>
             ))}
           </ul>

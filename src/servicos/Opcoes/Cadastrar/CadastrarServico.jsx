@@ -14,7 +14,6 @@ const CadastrarServico = () => {
     ds_servico: ''
   });
 
-  // Função para lidar com a mudança nos inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setServico({

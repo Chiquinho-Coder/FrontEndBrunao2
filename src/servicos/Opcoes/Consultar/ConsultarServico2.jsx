@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ConsultarServico2.scss';
 import img_servico from '../../../assets/images/img_servico.png';
-import { ConsultarPorId } from '../../../services/APIService'; // Certifique-se de que essa função está correta
+import { ConsultarPorId } from '../../../services/APIService'; 
 
 const ConsultarServico2 = () => {
-  const { id } = useParams(); // Ajuste aqui para usar 'id' se a rota for '/consultar-servico2/:id'
+  const { id } = useParams(); 
   const [servico, setServico] = useState(null);
   const [error, setError] = useState('');
 

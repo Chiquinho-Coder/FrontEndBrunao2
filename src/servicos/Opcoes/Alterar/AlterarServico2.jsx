@@ -6,7 +6,7 @@ import img_servico from '../../../assets/images/img_servico.png';
 
 const AlterarServico2 = () => {
   const { servicoId } = useParams();
-  const [clienteId, setClienteId] = useState(''); // Estado para o ID do cliente
+  const [clienteId, setClienteId] = useState(''); 
   const [endereco, setEndereco] = useState('');
   const [valor, setValor] = useState('');
   const [dataLimite, setDataLimite] = useState('');

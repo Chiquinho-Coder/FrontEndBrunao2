@@ -1,4 +1,18 @@
 
+.page_container{
+    h2{
+        color: #000;
+    text-align: center;
+    -webkit-text-stroke-width: 1;
+    -webkit-text-stroke-color: #FFF;
+    font-family: "AlfaSlab";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 20px;
+    }
+}
 .div_fots{
     display: flex; 
     align-items: center; 
@@ -19,28 +33,14 @@
     }
   }
 
-  .borda_cadastrar{ 
+
+
+  .borda_excluir{ 
     display: flex; 
     flex-direction: column; 
-    align-items: flex-start; 
-    justify-content: start;
-    padding-left: 30px;
-    margin-left: 500px;
-    font-family: 'AlfaSlab';
-    textarea {
-        width: 50%; /* Largura do textarea */
-        height: 100px; /* Altura do textarea */
-        padding: 10px; /* Espaçamento interno */
-        border: 1px solid #ccc; /* Borda do textarea */
-        border-radius: 4px; /* Bordas arredondadas */
-        font-size: 16px; /* Tamanho da fonte do textarea */
-    }
-    
-    textarea::placeholder {
-        font-size: 18px; /* Tamanho do placeholder */
-        color: #999; /* Cor do placeholder */
-        opacity: 1; /* Opacidade do placeholder */
-    }   
+    align-items: center; 
+    justify-content: space-between;
+    margin-left: 650px;
     h4{
         color: #000;
         text-align: center;
@@ -57,13 +57,29 @@
         width: 70%;
         margin: 10px 0;
     }
-
-    padding-top: 15px;
-    width: 832px;
-    height: 488px;
+    padding-top: 20px;
+    width: 520px;
+    height: 273px;
     border-radius: 25px;
     border: 5px solid #000;
     background: #F5B91E;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     
   }
+
+
+
+
+.btn_delete{
+    width: 146px;
+    height: 46px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background: #F00;
+    margin-bottom: 20px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25); 
+    cursor: pointer;
+}
+.btn_delete:hover{
+    color: aliceblue;
+}
