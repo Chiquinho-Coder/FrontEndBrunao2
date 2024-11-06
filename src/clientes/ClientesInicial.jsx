@@ -6,7 +6,7 @@ import "./ClientesInicial.scss";
 
 function ClientesInicial() {
   const [clientes, setClientes] = useState([]);
-  const API_URL = "http://localhost:3010";
+  const API_URL = "http://20.83.237.168:3010";
 
   const consultarClientes = async () => {
     try {
