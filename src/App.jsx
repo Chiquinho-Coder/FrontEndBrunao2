@@ -12,10 +12,10 @@ import "./css/styles.css";
 import "./App.scss";
 
 function App() {
-  const [expandedFAQ, setExpandedFAQ] = useState(null); // Usar useState para controlar a expansão do FAQ
+  const [expandedFAQ, setExpandedFAQ] = useState(null); 
 
   const toggleFAQ = (index) => {
-    // Alterna entre expandir e colapsar a FAQ
+ 
     setExpandedFAQ(expandedFAQ === index ? null : index);
   };
 
@@ -40,6 +40,7 @@ function App() {
           </Link>
         </div>
       </div>
+      <div className="topo">
       <section className="text_oreia">
         <p>Oferecendo o Melhor </p>
         <div className="servico">Serviço</div>
@@ -60,7 +61,13 @@ function App() {
           style={{ width: 548, height: 591, flexShrink: 0 }}
         />
       </div>
+      </div>
+      <div className='exp_borda'>
+      <h2>Experiência em:</h2>
+        <p>Alvenaria | Escavação | Pisos | Reboco | Telhados
 
+        </p> <p>Acabamentos Finos e muito mais </p>
+      </div>
       <section className="melhores_servicos">
         <section id="servico">
           <h2>
@@ -90,6 +97,80 @@ function App() {
           </div>
           <button className="btn_saiba">Explore Tudo</button>
         </section>
+      </section>
+      <section id="sobre">
+      <section className="como_trabalho">
+  <h2>Como <span>Trabalho</span></h2>
+  <div className="trabalho_items">
+    <div className="trabalho_item">
+      <h3>Agenda de Horários</h3>
+      <p>Agendar horário a partir do site para orçamento, verificar disponibilidade de horários e dias</p>
+      <button className="btn_saiba">Saiba Mais</button>
+    </div>
+    <div className="trabalho_item">
+      <h3>Orçamentos</h3>
+      <p>Serviços simples como colocar pisos, rebocar paredes, fazer aterramento entre outros possuem o preço tabelado por dia de serviço, coisas mais complexas necessitam de orçamento</p>
+      <button className="btn_saiba">Saiba Mais</button>
+    </div>
+    <div className="trabalho_item">
+      <h3>Planejamento</h3>
+      <p>Para serviços mais complexos será necessário um período de até 1 semana entre o orçamento e o início das obras por conta do planejamento que será feito com acompanhamento do cliente</p>
+      <button className="btn_saiba">Saiba Mais</button>
+    </div>
+  </div>
+</section>
+<section className="comentarios_clientes">
+  <h2>Comentários de <span>Clientes</span></h2>
+  <div className="comentario_item">
+  <img src={cliente} alt="cliente" />
+  <div className="comentario_texto">
+  <p class="avaliacao_texto">"Esse caba é bão."</p>
+  <p class="descricao_trabalho">Chamei ele lá em casa pra o bicho desenrolar um banheiro novo e ele resolveu tudo certo e ainda pedi tbm pra ele rebocar a parede do quarto de mainha e ele fez isso num dia só, RECEBA!! :D</p>
+  <p class="avaliacao_estrelas">★★★★★</p>
+  <p class="autor_avaliacao">- Sr. Reseba</p>
+</div>
+
+  </div>
+</section>
+</section>
+    <section className="pricing">
+        <div className="card">
+          <h2>Reparos</h2>
+          <p className="price">R$150/Dia</p>
+          <ul>
+            <li>Armador Padrão</li>
+            <li>Pequenos Reajustes</li>
+            <li>Trocar Azulejos</li>
+            <li>Rebaixar Gesso em Serviços</li>
+            <li>Alinhamento</li>
+          </ul>
+          <button>Quero esse!</button>
+        </div>
+
+        <div className="card highlight-card">
+          <h2>Serviços Simples</h2>
+          <p className="price">R$300/Dia</p>
+          <ul>
+            <li>Rebocar Paredes</li>
+            <li>Alinhamento Fino</li>
+            <li>Acabamento</li>
+            <li>Levantar Muros</li>
+            <li>Colocar Metais</li>
+            <li>Mais...</li>
+          </ul>
+          <button>Quero esse!</button>
+        </div>
+
+        <div className="card">
+          <h2>Personalizado</h2>
+          <p className="price">R$: A Combinar</p>
+          <ul>
+            <li>Serviço mais complexo ou sob medida</li>
+            <li>Discussão de preço com o cliente</li>
+            <li>Orçamento feito conforme necessidades</li>
+          </ul>
+          <button>Quero esse!</button>
+        </div>
       </section>
 
       <section className="faq">

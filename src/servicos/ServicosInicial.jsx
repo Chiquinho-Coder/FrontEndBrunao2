@@ -7,8 +7,8 @@ import "./ServicosInicial.scss";
 
 function ServicosInicial() {
   const [servicos, setServicos] = useState([]);
-  const API_URL = "http://localhost:3010";
-  //const API_URL = "http://20.83.237.168:3010";
+  //const API_URL = "http://localhost:3010";
+  const API_URL = "http://20.83.237.168:3010";
 
   const consultarServicos = async () => {
     try {
