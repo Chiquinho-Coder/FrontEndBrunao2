@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./AlterarServico2.scss";
 import img_servico from "../../../assets/images/img_servico.png";
+import { toast } from "react-hot-toast";
 
 const AlterarServico2 = () => {
   const { servicoId } = useParams();
@@ -17,6 +18,7 @@ const AlterarServico2 = () => {
   const API_URL = "http://20.83.237.168:3010";
 
   const fetchServico = async () => {
+   
     try {
       const response = await axios.get(
         `${API_URL}/alterar-servico/${servicoId}`
@@ -30,7 +32,6 @@ const AlterarServico2 = () => {
       setDataLimite(dt_estimada);
       setDescricao(ds_servico);
     } catch (error) {
-      console.error("Erro ao buscar o serviço:", error);
     } finally {
       setLoading(false);
     }
@@ -47,6 +48,11 @@ const AlterarServico2 = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!clienteId || !endereco || !valor || !dataLimite || !descricao) {
+      toast.error("Todos os campos são obrigatórios.");
+      return;
+    }
     try {
       await axios.put(`${API_URL}/alterar-servico/${servicoId}`, {
         fk_id_cli: clienteId,
@@ -55,10 +61,11 @@ const AlterarServico2 = () => {
         dt_estimada: dataLimite,
         ds_servico: descricao,
       });
-      alert("Serviço atualizado com sucesso!");
+      toast.success("Serviço atualizado com sucesso!");
       navigate("/servicos");
     } catch (error) {
       console.error("Erro ao atualizar o serviço:", error);
+      toast.error("Erro ao atualizar o serviço. Verifique os dados e tente novamente.");
     }
   };
 

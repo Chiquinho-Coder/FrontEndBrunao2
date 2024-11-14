@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./AlterarCliente2.scss";
 import img_cliente from "../../../assets/images/img_cliente.png";
+import { toast } from "react-hot-toast"; 
 
 const AlterarCliente2 = () => {
   const { clienteId } = useParams();
@@ -13,22 +14,20 @@ const AlterarCliente2 = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   //const API_URL = "http://localhost:3010";
-  const API_URL = "http://20.83.237.168:3010";
+   const API_URL = "http://20.83.237.168:3010"; 
 
   const fetchCliente = async () => {
     try {
-      const response = await axios.get(
-        `${API_URL}/alterar-cliente/${clienteId}`
-      );
-      const { ds_nome, ds_num_cli, ds_email_cli, ds_comentario } =
-        response.data;
-
+      const response = await axios.get(`${API_URL}/alterar-cliente/${clienteId}`);
+      const { ds_nome, ds_num_cli, ds_email_cli, ds_comentario } = response.data;
+      
       setNome(ds_nome);
       setNumero(ds_num_cli);
       setEmail(ds_email_cli);
       setComentario(ds_comentario);
     } catch (error) {
       console.error("Erro ao buscar o cliente:", error);
+      toast.error("Erro ao buscar o cliente. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -38,13 +37,19 @@ const AlterarCliente2 = () => {
     fetchCliente();
   }, [clienteId]);
 
+
   const handleNomeChange = (e) => setNome(e.target.value);
   const handleNumeroChange = (e) => setNumero(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleComentarioChange = (e) => setComentario(e.target.value);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!nome || !numero || !email || !comentario) {
+      toast.error("Por favor, preencha todos os campos.");
+      return;
+    }
+
     try {
       await axios.put(`${API_URL}/alterar-cliente/${clienteId}`, {
         ds_nome: nome,
@@ -52,10 +57,11 @@ const AlterarCliente2 = () => {
         ds_email_cli: email,
         ds_comentario: comentario,
       });
-      alert("Cliente atualizado com sucesso!");
+      toast.success("Cliente atualizado com sucesso!");
       navigate("/clientes");
     } catch (error) {
       console.error("Erro ao atualizar o cliente:", error);
+      toast.error("Erro ao atualizar o cliente. Tente novamente.");
     }
   };
 

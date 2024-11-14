@@ -3,25 +3,28 @@ import { useNavigate, Link } from "react-router-dom";
 import "./ConsultarCliente.scss";
 import img_cliente from "../../../assets/images/img_cliente.png";
 import { ConsultarClientePorId } from "../../../services/APIService";
+import { toast } from "react-hot-toast";
+
 const ConsultarCliente = () => {
   const [clienteId, setClienteId] = useState("");
-  const [error, setError] = useState("");
+  const [error] = useState("");
   const navigate = useNavigate();
 
   const handleConsultarClick = async () => {
-    if (clienteId) {
-      try {
-        const service = await ConsultarClientePorId(clienteId);
-        if (service) {
-          navigate(`/consultar-cliente2/${clienteId}`);
-        } else {
-          setError("Serviço não encontrado.");
-        }
-      } catch (err) {
-        setError("Erro ao consultar o serviço.");
+    if (clienteId.trim() === "") {
+      toast.error("Por favor, insira o ID do cliente.");
+      return;
+    }
+    try {
+      const response = await ConsultarClientePorId(clienteId);
+      if (response) {
+        toast.success(`Cliente com ID ${clienteId} encontrado!`);
+        navigate(`/consultar-cliente2/${clienteId}`);
+      } else {
+        toast.error("Cliente não encontrado.");
       }
-    } else {
-      alert("Por favor, insira o ID do serviço.");
+    } catch (err) {
+      toast.error("Erro ao consultar o cliente.");
     }
   };
 

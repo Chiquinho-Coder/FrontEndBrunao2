@@ -3,32 +3,30 @@ import { Link } from "react-router-dom";
 import "./ExcluirServico.scss";
 import img_servico from "../../../assets/images/img_servico.png";
 import { deletarUser } from "../../../services/APIService.js";
+import { toast } from "react-hot-toast";
 
 const ExcluirServico = () => {
   const [servicoId, setServicoId] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
 
   const handleDelete = async () => {
     if (servicoId.trim() === "") {
-      setError("Por favor, insira o ID do serviço que deseja excluir.");
+      toast.error("Por favor, insira o ID do serviço que deseja excluir.");
       return;
     }
 
     try {
-      const response = await deletarUser(servicoId);
-      setMessage(`Serviço com ID ${servicoId} foi excluído com sucesso!`);
-      setError("");
+      await deletarUser(servicoId); 
+      toast.success(`Serviço com ID ${servicoId} foi excluído com sucesso!`);
       setServicoId("");
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        setError(`Erro: Serviço com ID ${servicoId} não encontrado.`);
+        toast.error(`Erro: Serviço com ID ${servicoId} não encontrado.`);
       } else {
-        setError(`Erro ao excluir o serviço com ID ${servicoId}.`);
+        toast.error(`Erro ao excluir o serviço com ID ${servicoId}.`);
       }
-      setMessage("");
     }
   };
+
   return (
     <div className="page_container">
       <div className="div_fots">
@@ -109,8 +107,6 @@ const ExcluirServico = () => {
         <button className="btn_delete" onClick={handleDelete}>
           Excluir
         </button>
-        {message && <p className="success-message">{message}</p>}
-        {error && <p className="error-message">{error}</p>}
       </div>
     </div>
   );

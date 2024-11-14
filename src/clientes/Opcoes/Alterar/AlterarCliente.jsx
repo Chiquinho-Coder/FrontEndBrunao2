@@ -1,33 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import img_cliente from "../../../assets/images/img_cliente.png";
 import "./AlterarCliente.scss";
 import { AlterarClientePorId } from "../../../services/APIService";
 
 const AlterarCliente = () => {
   const [clienteId, setClienteId] = useState("");
-  const [error, setError] = useState("");
+  const [error] = useState("");
   const navigate = useNavigate();
 
   const handleAlterarClick = async () => {
     if (clienteId) {
       try {
+ 
         const response = await AlterarClientePorId(clienteId);
 
         if (response) {
+          toast.success("Cliente encontrado. Redirecionando para alteração."); 
           navigate(`/alterar-cliente2/${clienteId}`);
         } else {
-          setError("Cliente não encontrado.");
+          toast.error("Cliente não encontrado."); 
         }
       } catch (err) {
         if (err.response && err.response.status === 404) {
-          setError("Cliente não encontrado. Verifique o ID e tente novamente.");
+          toast.error("Cliente não encontrado. Verifique o ID e tente novamente."); 
         } else {
-          setError("Erro ao consultar o cliente ID errado.");
+          toast.error("Erro ao consultar o cliente. Tente novamente.");     
         }
       }
     } else {
-      alert("Por favor, insira o ID do Cliente.");
+      toast.error("Por favor, insira o ID do Cliente."); 
     }
   };
 

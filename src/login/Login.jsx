@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { loginUser } from "../services/APIService.js";
 import "./Login.scss";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -16,13 +17,11 @@ const Login = () => {
       const credenciais = { usuario: username, senha: password };
       const { token } = await loginUser(credenciais);
 
-      // Salva o token no localStorage
       localStorage.setItem("token", token);
-
+      toast.success("Login realizado com sucesso")
       navigate("/pre-tabela");
     } catch (err) {
-      setError("Erro ao fazer login. Verifique suas credenciais.");
-      console.error("Erro de login:", err);
+      toast.error("Erro ao fazer login. Verifique suas credenciais.");
     }
   };
 

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast"; 
 import "./CadastrarCliente.scss";
 import img_cliente from "../../../assets/images/img_cliente.png";
 import { cadastrarCliente } from "../../../services/APIService";
 
 const CadastrarCliente = () => {
-  const [mensagemSucesso, setMensagemSucesso] = useState("");
   const [cliente, setCliente] = useState({
     ds_nome: "",
     ds_num_cli: "",
@@ -23,12 +23,25 @@ const CadastrarCliente = () => {
 
   const handleCadastrar = async (e) => {
     e.preventDefault();
+
+    if (!cliente.ds_nome || !cliente.ds_num_cli || !cliente.ds_email_cli || !cliente.ds_comentario) {
+      toast.error("Todos os campos são obrigatórios!"); 
+      return;
+    }
+
+    if (!/^\d+$/.test(cliente.ds_num_cli)) {
+      toast.error("O número do cliente deve ser um valor numérico válido."); 
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(cliente.ds_email_cli)) {
+      toast.error("O e-mail fornecido não é válido."); 
+      return;
+    }
+
     try {
       const response = await cadastrarCliente(cliente);
-      alert("Cliente cadastrado com sucesso!");
-
-      setTimeout(() => setMensagemSucesso(""), 3000);
-
+      toast.success("Cliente cadastrado com sucesso!"); 
       setCliente({
         ds_nome: "",
         ds_num_cli: "",
@@ -36,7 +49,7 @@ const CadastrarCliente = () => {
         ds_comentario: "",
       });
     } catch (error) {
-      alert("Erro ao cadastrar o Cliente.");
+      toast.error("Erro ao cadastrar o Cliente."); 
     }
   };
 
@@ -107,7 +120,6 @@ const CadastrarCliente = () => {
           </defs>
         </svg>
       </Link>
-      {mensagemSucesso && <p className="mensagem-sucesso">{mensagemSucesso}</p>}
 
       <div className="borda_cadastrar">
         <label>Nome</label>

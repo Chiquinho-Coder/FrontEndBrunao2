@@ -3,7 +3,7 @@ import './CadastrarServico.scss';
 import img_servico from '../../../assets/images/img_servico.png';
 import { cadastrarServico } from '../../../services/APIService';
 import { Link } from 'react-router-dom';
-
+import { toast } from 'react-hot-toast';
 
 const CadastrarServico = () => {
   const [mensagemSucesso, setMensagemSucesso] = useState('');
@@ -23,18 +23,19 @@ const CadastrarServico = () => {
     });
   };
 
-  
   const handleCadastrar = async (e) => {
-    e.preventDefault(); 
-    try {
-           
-            const response = await cadastrarServico(servico); 
-            alert('Serviço cadastrado com sucesso!');
-    
-      
-      setTimeout(() => setMensagemSucesso(''), 3000);
+    e.preventDefault();
 
-      
+    if (!servico.fk_id_cli || !servico.ds_endereco || !servico.vlr_servico || !servico.dt_estimada || !servico.ds_servico) {
+      toast.error("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    try {
+      await cadastrarServico(servico);
+      toast.success("Serviço cadastrado com sucesso!");
+
+      setTimeout(() => setMensagemSucesso(''), 3000);
       setServico({
         fk_id_cli: '',
         ds_endereco: '',
@@ -43,7 +44,11 @@ const CadastrarServico = () => {
         ds_servico: ''
       });
     } catch (error) {
-      alert('Erro ao cadastrar o serviço. Digite um ID de cliente existente.'); 
+      if (error.response && error.response.status === 404) {
+        toast.error("Erro: Cliente não encontrado. Digite um ID de cliente existente.");
+      } else {
+        toast.error("Erro ao cadastrar o serviço.");
+      }
     }
   };
   return (

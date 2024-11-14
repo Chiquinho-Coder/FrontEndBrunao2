@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import img_servico from "../../../assets/images/img_servico.png";
 import "./AlterarServico.scss";
 import { AlterarPorId } from "../../../services/APIService";
+import { toast } from "react-hot-toast";
 
 const AlterarServico = () => {
   const [servicoId, setServicoId] = useState("");
@@ -10,24 +11,27 @@ const AlterarServico = () => {
   const navigate = useNavigate();
 
   const handleAlterarClick = async () => {
-    if (servicoId) {
-      try {
-        const service = await AlterarPorId(servicoId);
-        if (service) {
-          navigate(`/alterar-servico2/${servicoId}`);
-        }
-      } catch (err) {
-        if (err.message === "ID do serviço não encontrado.") {
-          setError("Serviço não encontrado.");
-        } else {
-          setError("Erro ao consultar o serviço.");
-        }
+    if (servicoId.trim() === "") {
+      toast.error("Por favor, insira o ID do serviço.");
+      return;
+    }
+
+    try {
+      const service = await AlterarPorId(servicoId);
+      if (service) {
+        toast.success("Serviço encontrado. Redirecionando...");
+        navigate(`/alterar-servico2/${servicoId}`);
+      } else {
+        toast.error("Serviço não encontrado.");
       }
-    } else {
-      alert("Por favor, insira o ID do serviço.");
+    } catch (err) {
+      if (err.message === "ID do serviço não encontrado.") {
+        toast.error("Serviço não encontrado.");
+      } else {
+        toast.error("Erro ao consultar o serviço.");
+      }
     }
   };
-
   return (
     <div className="page_container">
       <div className="div_fots">

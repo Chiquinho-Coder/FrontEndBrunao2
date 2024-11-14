@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import { Toaster } from "react-hot-toast";
 import Login from "../src/login/Login.jsx";
 import PreTabela from "../src/pré-tabela/PreTabela.jsx";
 import ServicosInicial from "../src/servicos/ServicosInicial.jsx";
@@ -21,8 +22,10 @@ import ConsultarCliente from "./clientes/Opcoes/Consultar/ConsultarCliente.jsx";
 import ConsultarCliente2 from "./clientes/Opcoes/Consultar/ConsultarCliente2.jsx";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+ 
   <React.StrictMode>
     <BrowserRouter>
+    <Toaster />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />

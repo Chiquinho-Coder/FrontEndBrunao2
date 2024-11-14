@@ -111,7 +111,7 @@ const ConsultarServico2 = () => {
           <label>Data Estimada:</label>
           <input
             type="date"
-            value={servico.dt_estimada.slice(0, 10)}
+            value={servico.dt_estimada ? servico.dt_estimada.slice(0, 10) : ""} 
             readOnly
           />
 

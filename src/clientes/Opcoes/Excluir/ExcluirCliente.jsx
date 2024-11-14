@@ -3,30 +3,32 @@ import { Link } from "react-router-dom";
 import "./ExcluirCliente.scss";
 import img_cliente from "../../../assets/images/img_cliente.png";
 import { deletarCliente } from "../../../services/APIService";
+import { toast } from "react-hot-toast";
 
 const ExcluirCliente = () => {
   const [clienteId, setClienteId] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+
   const handleDelete = async () => {
     if (clienteId.trim() === "") {
-      setError("Por favor, insira o ID do cliente que deseja excluir.");
+      toast.error("Por favor, insira o ID do cliente que deseja excluir.");
       return;
     }
 
     try {
       const response = await deletarCliente(clienteId);
-      setMessage(`Cliente com ID ${clienteId} foi excluído com sucesso!`);
-      setError("");
-      setClienteId("");
+      toast.success(`Cliente com ID ${clienteId} foi excluído com sucesso!`);
+      setError(""); 
+      setClienteId(""); 
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        setError(`Erro: Cliente com ID ${clienteId} não encontrado.`);
+        toast.error(`Cliente com ID ${clienteId} não encontrado.`);
       } else {
-        setError(`Erro ao excluir o cliente com ID ${clienteId}.`);
+        toast.error("Erro ao excluir o cliente. Tente novamente.");
       }
-      setMessage("");
+      setMessage(""); 
     }
   };
   return (

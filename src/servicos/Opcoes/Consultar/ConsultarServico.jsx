@@ -3,30 +3,32 @@ import { useNavigate, Link } from "react-router-dom";
 import "./ConsultarServico.scss";
 import img_servico from "../../../assets/images/img_servico.png";
 import { ConsultarPorId } from "../../../services/APIService";
+import { toast } from "react-hot-toast";
 
 const ConsultarServico = () => {
   const [servicoId, setServicoId] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleConsultarClick = async () => {
-    if (servicoId) {
-      try {
-        const service = await ConsultarPorId(servicoId);
+    if (servicoId.trim() === "") {
+      toast.error("Por favor, insira o ID do serviço.");
+      return;
+    }
 
-        if (service) {
-          navigate(`/consultar-servico2/${servicoId}`);
-        } else {
-          setError("Serviço não encontrado.");
-        }
-      } catch (err) {
-        setError("Erro ao consultar o serviço.");
+    try {
+      const service = await ConsultarPorId(servicoId);
+
+      if (service) {
+        toast.success(`Serviço com ID ${servicoId} encontrado!`);
+        navigate(`/consultar-servico2/${servicoId}`);
+      } else {
+        toast.error("Serviço não encontrado.");
       }
-    } else {
-      alert("Por favor, insira o ID do serviço.");
+    } catch (err) {
+      toast.error("Erro ao consultar o serviço.");
     }
   };
-
+  
   return (
     <div className="page_container">
       <div className="div_fots">
@@ -94,7 +96,6 @@ const ConsultarServico = () => {
           </defs>
         </svg>
       </Link>
-      {error && <p className="error-message">{error}</p>}
       <div className="borda_consultar">
         <h4>Deseja consultar por qual ID</h4>
         <input
