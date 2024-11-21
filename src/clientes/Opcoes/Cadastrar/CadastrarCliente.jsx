@@ -15,10 +15,20 @@ const CadastrarCliente = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCliente({
-      ...cliente,
-      [name]: value,
-    });
+  
+    if (name === "ds_num_cli") {
+     
+      const rawValue = value.replace(/\D/g, "");
+      
+      const formattedValue = rawValue
+        .replace(/^(\d{2})(\d)/, "($1)$2") 
+        .replace(/(\d{5})(\d)/, "$1-$2") 
+        .slice(0, 14); 
+  
+      setCliente({ ...cliente, [name]: formattedValue });
+    } else {
+      setCliente({ ...cliente, [name]: value });
+    }
   };
 
   const handleCadastrar = async (e) => {
@@ -29,8 +39,9 @@ const CadastrarCliente = () => {
       return;
     }
 
-    if (!/^\d+$/.test(cliente.ds_num_cli)) {
-      toast.error("O número do cliente deve ser um valor numérico válido."); 
+    const telefoneRegex = /^\(\d{2}\)\d{5}-\d{4}$/;
+    if (!telefoneRegex.test(cliente.ds_num_cli)) {
+      toast.error("O número do cliente deve estar no formato (11)93424-2344."); 
       return;
     }
 

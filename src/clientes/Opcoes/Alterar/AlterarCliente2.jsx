@@ -16,6 +16,8 @@ const AlterarCliente2 = () => {
   //const API_URL = "http://localhost:3010";
    const API_URL = "http://20.83.237.168:3010"; 
 
+
+   
   const fetchCliente = async () => {
     try {
       const response = await axios.get(`${API_URL}/alterar-cliente/${clienteId}`);
@@ -26,8 +28,7 @@ const AlterarCliente2 = () => {
       setEmail(ds_email_cli);
       setComentario(ds_comentario);
     } catch (error) {
-      console.error("Erro ao buscar o cliente:", error);
-      toast.error("Erro ao buscar o cliente. Tente novamente.");
+
     } finally {
       setLoading(false);
     }
@@ -39,7 +40,15 @@ const AlterarCliente2 = () => {
 
 
   const handleNomeChange = (e) => setNome(e.target.value);
-  const handleNumeroChange = (e) => setNumero(e.target.value);
+  const handleNumeroChange = (e) => {
+    const rawValue = e.target.value.replace(/\D/g, "");
+    const formattedValue = rawValue
+      .replace(/^(\d{2})(\d)/, "($1)$2")
+      .replace(/(\d{5})(\d)/, "$1-$2")
+      .slice(0, 14);
+    setNumero(formattedValue);
+  };
+
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handleComentarioChange = (e) => setComentario(e.target.value);
   const handleSubmit = async (e) => {
@@ -47,6 +56,12 @@ const AlterarCliente2 = () => {
 
     if (!nome || !numero || !email || !comentario) {
       toast.error("Por favor, preencha todos os campos.");
+      return;
+    }
+
+    const telefoneRegex = /^\(\d{2}\)\d{5}-\d{4}$/;
+    if (!telefoneRegex.test(numero)) {
+      toast.error("O número do cliente deve estar no formato (11)93424-2344.");
       return;
     }
 
@@ -80,61 +95,7 @@ const AlterarCliente2 = () => {
         />
         <h1>Clientes</h1>
       </div>
-      <Link to="/alterar-cliente">
-        <svg
-          className="svg_seta"
-          xmlns="http://www.w3.org/2000/svg"
-          width="200"
-          height="50"
-          viewBox="0 0 82 43"
-          fill="none"
-        >
-          <g filter="url(#filter0_d_60_451)">
-            <rect x="19" y="13.1042" width="59" height="13" fill="#F5B91E" />
-            <path
-              d="M4.11706 18.7931L26.5154 2.62986L26.7178 34.6722L4.11706 18.7931Z"
-              fill="#F5B91E"
-            />
-          </g>
-          <defs>
-            <filter
-              id="filter0_d_60_451"
-              x="0.117188"
-              y="2.62988"
-              width="81.8828"
-              height="40.0422"
-              filterUnits="userSpaceOnUse"
-              color-interpolation-filters="sRGB"
-            >
-              <feFlood flood-opacity="0" result="BackgroundImageFix" />
-              <feColorMatrix
-                in="SourceAlpha"
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                result="hardAlpha"
-              />
-              <feOffset dy="4" />
-              <feGaussianBlur stdDeviation="2" />
-              <feComposite in2="hardAlpha" operator="out" />
-              <feColorMatrix
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-              />
-              <feBlend
-                mode="normal"
-                in2="BackgroundImageFix"
-                result="effect1_dropShadow_60_451"
-              />
-              <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="effect1_dropShadow_60_451"
-                result="shape"
-              />
-            </filter>
-          </defs>
-        </svg>
-      </Link>
+
       <h1 className="title">Alterar Cliente - ID: {clienteId}</h1>
 
       <div className="borda_alterar2">

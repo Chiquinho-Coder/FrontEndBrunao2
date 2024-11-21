@@ -20,7 +20,7 @@ const ConsultarCliente2 = () => {
           setError("Serviço não encontrado.");
         }
       } catch (err) {
-        alert("Erro ao buscar o serviço ID Invalido.");
+  
         console.error(err);
       }
     };

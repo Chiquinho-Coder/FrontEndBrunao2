@@ -53,15 +53,28 @@ function ClientesInicial() {
         </div>
         <div className="clientes-lista">
           <h2>Clientes Cadastrados:</h2>
-          <ul>
-            {clientes.map((cliente) => (
-              <li key={cliente.id}>
-                ID Cliente : {cliente.id_cli} - Nome: {cliente.ds_nome} - Email:{" "}
-                {cliente.ds_email_cli} - Telefone: {cliente.ds_num_cli} -
-                Comentario: {cliente.ds_comentario}
-              </li>
-            ))}
-          </ul>
+          <table className="clientes-tabela">
+            <thead>
+              <tr>
+                <th>ID Cliente</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Comentário</th>
+              </tr>
+            </thead>
+            <tbody>
+              {clientes.map((cliente) => (
+                <tr key={cliente.id}>
+                  <td>{cliente.id_cli}</td>
+                  <td>{cliente.ds_nome}</td>
+                  <td>{cliente.ds_email_cli}</td>
+                  <td>{cliente.ds_num_cli}</td>
+                  <td>{cliente.ds_comentario}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

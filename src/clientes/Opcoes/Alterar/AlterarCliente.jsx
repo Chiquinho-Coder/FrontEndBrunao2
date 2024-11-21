@@ -26,7 +26,7 @@ const AlterarCliente = () => {
         if (err.response && err.response.status === 404) {
           toast.error("Cliente não encontrado. Verifique o ID e tente novamente."); 
         } else {
-          toast.error("Erro ao consultar o cliente. Tente novamente.");     
+          toast.error("Erro ao buscar o cliente. Tente novamente.");     
         }
       }
     } else {
@@ -106,7 +106,7 @@ const AlterarCliente = () => {
         <h4>Deseja alterar por qual ID</h4>
         <input
           type="text"
-          placeholder="ID do cliente a consultar"
+          placeholder="ID do cliente a alterar"
           value={clienteId}
           onChange={(e) => setClienteId(e.target.value)}
         />

@@ -70,3 +70,29 @@
   margin: 5px 0;
   border-radius: 5px;
 }
+
+
+.clientes-tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.clientes-tabela th,
+.clientes-tabela td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.clientes-tabela th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.clientes-tabela tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.clientes-tabela tr:hover {
+  background-color: #f1f1f1;
+}

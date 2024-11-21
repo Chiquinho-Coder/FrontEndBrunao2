@@ -1,4 +1,3 @@
-// ServicosInicial.jsx
 import img_servico from "../assets/images/img_servico.png";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -54,17 +53,34 @@ function ServicosInicial() {
         </div>
         <div className="servicos-lista">
           <h2>Serviços Cadastrados:</h2>
-          <ul>
-            {servicos.map((servico) => (
-              <li key={servico.id}>
-                ID Serviço: {servico.id_servico} - ID Cliente:{" "}
-                {servico.fk_id_cli} - Endereço: {servico.ds_endereco} - Valor:
-                R${servico.vlr_servico} - Data :{" "}
-                {new Date(servico.dt_estimada).toLocaleDateString("pt-BR")} -
-                Descrição: {servico.ds_servico}
-              </li>
-            ))}
-          </ul>
+          <table className="servicos-tabela">
+            <thead>
+              <tr>
+                <th>ID Serviço</th>
+                <th>ID Cliente</th>
+                <th>Endereço</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Descrição</th>
+              </tr>
+            </thead>
+            <tbody>
+              {servicos.map((servico) => (
+                <tr key={servico.id_servico}>
+                  <td>{servico.id_servico}</td>
+                  <td>{servico.fk_id_cli}</td>
+                  <td>{servico.ds_endereco}</td>
+                  <td>R${parseFloat(servico.vlr_servico).toFixed(2)}</td>
+                  <td>
+                    {new Date(servico.dt_estimada).toLocaleDateString("pt-BR", {
+                      timeZone: "UTC",
+                    })}
+                  </td>
+                  <td>{servico.ds_servico}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

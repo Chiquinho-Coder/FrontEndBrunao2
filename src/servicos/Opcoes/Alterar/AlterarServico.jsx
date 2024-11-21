@@ -28,7 +28,7 @@ const AlterarServico = () => {
       if (err.message === "ID do serviço não encontrado.") {
         toast.error("Serviço não encontrado.");
       } else {
-        toast.error("Erro ao consultar o serviço.");
+        toast.error("Erro ao buscar o serviço.");
       }
     }
   };
@@ -103,7 +103,7 @@ const AlterarServico = () => {
         <h4>Deseja alterar por qual ID</h4>
         <input
           type="text"
-          placeholder="ID do serviço a consultar"
+          placeholder="ID do serviço a alterar"
           value={servicoId}
           onChange={(e) => setServicoId(e.target.value)}
         />
